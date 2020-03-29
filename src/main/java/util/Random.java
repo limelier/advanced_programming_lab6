@@ -1,8 +1,9 @@
-import java.awt.*;
-import java.util.Random;
+package util;
 
-public class Util {
-    static Random random = new Random();
+import java.awt.*;
+
+public class Random {
+    static java.util.Random random = new java.util.Random();
 
     public static int generateRadius() {
         return random.nextInt(60);

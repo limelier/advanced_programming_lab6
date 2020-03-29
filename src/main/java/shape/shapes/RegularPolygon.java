@@ -1,3 +1,5 @@
+package shape.shapes;
+
 import java.awt.*;
 
 public class RegularPolygon extends Polygon {
