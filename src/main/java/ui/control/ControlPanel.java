@@ -4,6 +4,7 @@ import ui.MainFrame;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
@@ -15,6 +16,8 @@ public class ControlPanel extends JPanel {
     JButton loadBtn = new JButton("Load");
     JButton resetBtn = new JButton("Reset");
     JButton exitBtn = new JButton("Exit");
+    JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+
 
     public ControlPanel(MainFrame frame) {
         this.frame = frame;
@@ -37,7 +40,10 @@ public class ControlPanel extends JPanel {
 
     private void save(ActionEvent e) {
         try {
-            ImageIO.write(frame.canvas.getImage(), "PNG", new File("test_saves/test.png"));
+            if (jfc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+                File selectedFile = jfc.getSelectedFile();
+                ImageIO.write(frame.canvas.getImage(), "PNG", selectedFile);
+            }
         } catch (IOException ex) {
             System.err.println(ex.toString());
         }
@@ -45,8 +51,12 @@ public class ControlPanel extends JPanel {
 
     private void load(ActionEvent e) {
         try {
-            frame.canvas.load(ImageIO.read(new File("test_saves/test.png")));
-            frame.repaint();
+            if (jfc.showDialog(this, "Load") == JFileChooser.APPROVE_OPTION) {
+                File selectedFile = jfc.getSelectedFile();
+                frame.canvas.load(ImageIO.read(selectedFile));
+                frame.repaint();
+            }
+
         } catch (IOException ex) {
             System.err.println(ex.toString());
         }
