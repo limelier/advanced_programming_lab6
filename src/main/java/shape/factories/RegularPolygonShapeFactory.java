@@ -11,8 +11,8 @@ import java.beans.PropertyChangeEvent;
  * Allows the creation of regular polygons of a given radius and number of sides at some coordinates.
  */
 public class RegularPolygonShapeFactory implements ShapeFactory {
-    public int radius;
-    public int sides;
+    private int radius;
+    private int sides;
 
     public RegularPolygonShapeFactory(int sides, int radius) {
         this.radius = radius;
