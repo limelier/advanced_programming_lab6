@@ -1,8 +1,8 @@
 package ui;
 
 import ui.canvas.DrawingPanel;
-import ui.options.OptionsPanel;
 import ui.control.ControlPanel;
+import ui.options.RegularPolygonOptionsPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,7 +11,7 @@ import java.awt.*;
  * The main frame of the application, holds the other ones.
  */
 public class MainFrame extends JFrame {
-    public OptionsPanel optionsPanel;
+    public RegularPolygonOptionsPanel optionsPanel;
     public ControlPanel controlPanel;
     public DrawingPanel canvas;
 
@@ -25,7 +25,7 @@ public class MainFrame extends JFrame {
      */
     private void init() {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        optionsPanel = new OptionsPanel(this);
+        optionsPanel = new RegularPolygonOptionsPanel(this);
         controlPanel = new ControlPanel(this);
         canvas = new DrawingPanel(this);
 
