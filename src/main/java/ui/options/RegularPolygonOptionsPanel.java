@@ -5,15 +5,13 @@ import ui.MainFrame;
 import javax.swing.*;
 
 public class RegularPolygonOptionsPanel extends OptionsPanel {
-    final MainFrame frame;
     JLabel sidesLabel;
     JSpinner sidesField;
-
     JLabel sizeLabel;
     JSpinner sizeField;
 
     public RegularPolygonOptionsPanel(MainFrame frame, int sides, int size) {
-        this.frame = frame;
+        super(frame);
         init(sides, size);
     }
 
@@ -26,17 +24,12 @@ public class RegularPolygonOptionsPanel extends OptionsPanel {
         sizeField = new JSpinner(new SpinnerNumberModel(size, 1, 100, 1));
         sizeField.setName("size");
 
-        colorLabel = new JLabel("Color:");
-        colorCombo = new JComboBox<>();
-        colorCombo.addItem("Random");
-        colorCombo.addItem("Black");
-
         add(sidesLabel); // JPanel uses FlowLayout by default
         add(sidesField);
         add(sizeLabel);
         add(sizeField);
-        add(colorLabel);
-        add(colorCombo);
+
+        super.addColorControls();
 
         sidesField.addChangeListener(frame.shapeController.getFactory());
         sizeField.addChangeListener(frame.shapeController.getFactory());
