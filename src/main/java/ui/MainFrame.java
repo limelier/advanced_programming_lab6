@@ -25,7 +25,7 @@ public class MainFrame extends JFrame {
     public ToolPanel toolPanel;
 
     public MainFrame() {
-        super("My Drawing Application");
+        super("Extreme Shape Drawing Experience");
         init();
     }
 
