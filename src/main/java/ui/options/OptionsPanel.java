@@ -1,10 +1,10 @@
-package ui.config;
+package ui.options;
 
 import ui.MainFrame;
 
 import javax.swing.*;
 
-public class ConfigPanel extends JPanel {
+public class OptionsPanel extends JPanel {
     final MainFrame frame;
     JLabel sidesLabel; // we're drawing regular polygons
     JSpinner sidesField; // number of sides
@@ -15,7 +15,7 @@ public class ConfigPanel extends JPanel {
     JLabel colorLabel;
     JComboBox<String> colorCombo; // the color of the shape
 
-    public ConfigPanel(MainFrame frame) {
+    public OptionsPanel(MainFrame frame) {
         this.frame = frame;
         init();
     }

@@ -1,7 +1,7 @@
 package ui;
 
 import ui.canvas.DrawingPanel;
-import ui.config.ConfigPanel;
+import ui.options.OptionsPanel;
 import ui.control.ControlPanel;
 
 import javax.swing.*;
@@ -11,7 +11,7 @@ import java.awt.*;
  * The main frame of the application, holds the other ones.
  */
 public class MainFrame extends JFrame {
-    public ConfigPanel configPanel;
+    public OptionsPanel optionsPanel;
     public ControlPanel controlPanel;
     public DrawingPanel canvas;
 
@@ -25,11 +25,11 @@ public class MainFrame extends JFrame {
      */
     private void init() {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        configPanel = new ConfigPanel(this);
+        optionsPanel = new OptionsPanel(this);
         controlPanel = new ControlPanel(this);
         canvas = new DrawingPanel(this);
 
-        add(configPanel, BorderLayout.NORTH);
+        add(optionsPanel, BorderLayout.NORTH);
         add(canvas, BorderLayout.CENTER);
         add(controlPanel, BorderLayout.SOUTH);
 
