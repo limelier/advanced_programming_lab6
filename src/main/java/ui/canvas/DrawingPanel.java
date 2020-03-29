@@ -5,6 +5,7 @@ import util.Random;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -45,26 +46,27 @@ public class DrawingPanel extends JPanel {
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                drawShape(e.getX(), e.getY());
+                addShape(e.getX(), e.getY());
                 repaint();
             }
         });
     }
 
-    private void drawShape(int x, int y) {
+    private void addShape(int x, int y) {
         Shape shape = frame.shapeController.getShape(x, y);
         Color color = frame.optionsPanel.getColorIsRandom() ? Random.randomColor() : Color.BLACK;
         CanvasShape canvasShape = new CanvasShape(shape, color);
-        addToUndoStack(canvasShape);
+        addToActiveDeque(canvasShape);
+        redoDeque.clear();
     }
 
-    private void addToUndoStack(CanvasShape shape) {
+    private void addToActiveDeque(CanvasShape shape) {
         if (activeDeque.size() == 50) {
             CanvasShape lastShape = activeDeque.removeLast();
             graphics.setColor(lastShape.color);
             graphics.fill(shape.shape);
         }
-        activeDeque.add(shape);
+        activeDeque.addFirst(shape);
     }
 
     private BufferedImage activeImage() {
@@ -91,6 +93,8 @@ public class DrawingPanel extends JPanel {
 
     public void reset() {
         createOffScreenImage();
+        activeDeque.clear();
+        redoDeque.clear();
     }
 
     public void load(BufferedImage read) {
@@ -101,6 +105,20 @@ public class DrawingPanel extends JPanel {
     }
 
     public BufferedImage getImage() {
-        return image;
+        return activeImage();
+    }
+
+    public void undo() {
+        if (!activeDeque.isEmpty()) {
+            CanvasShape shape = activeDeque.removeFirst();
+            redoDeque.addFirst(shape);
+        }
+    }
+
+    public void redo() {
+        if (!redoDeque.isEmpty()) {
+            CanvasShape shape = redoDeque.removeFirst();
+            activeDeque.addFirst(shape);
+        }
     }
 }
