@@ -1,3 +1,9 @@
+package ui.canvas;
+
+import shapes.RegularPolygon;
+import ui.MainFrame;
+import util.Random;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -8,8 +14,8 @@ public class DrawingPanel extends JPanel {
     final MainFrame frame;
     final static int W = 800, H = 600;
 
-    BufferedImage image; // the offscreen image
-    Graphics2D graphics; // the "tools" needed to draw the image
+    BufferedImage image;
+    Graphics2D graphics;
 
     public DrawingPanel(MainFrame frame) {
         this.frame = frame;
@@ -25,12 +31,13 @@ public class DrawingPanel extends JPanel {
     }
 
     private void init() {
-        setPreferredSize(new Dimension(W, H)); // not setsize b/c it might not fit?
+        setPreferredSize(new Dimension(W, H));
         setBorder(BorderFactory.createEtchedBorder());
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                drawShape(e.getX(), e.getY()); repaint();
+                drawShape(e.getX(), e.getY());
+                repaint();
             }
         });
     }
@@ -38,7 +45,7 @@ public class DrawingPanel extends JPanel {
     private void drawShape(int x, int y) {
         int radius = frame.configPanel.getShapeSize();
         int sides = frame.configPanel.getShapeSides();
-        Color color = frame.configPanel.getColorIsRandom() ? Util.randomColor() : Color.BLACK;
+        Color color = frame.configPanel.getColorIsRandom() ? Random.randomColor() : Color.BLACK;
         graphics.setColor(color);
         graphics.fill(new RegularPolygon(x, y, radius, sides));
     }
@@ -53,12 +60,16 @@ public class DrawingPanel extends JPanel {
         g.drawImage(image, 0, 0, this);
     }
 
-    void reset() {
+    public void reset() {
         createOffScreenImage();
     }
 
     public void load(BufferedImage read) {
         image = read;
         graphics = image.createGraphics();
+    }
+
+    public BufferedImage getImage() {
+        return image;
     }
 }

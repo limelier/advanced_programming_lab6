@@ -1,3 +1,7 @@
+package ui.control;
+
+import ui.MainFrame;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -33,7 +37,7 @@ public class ControlPanel extends JPanel {
 
     private void save(ActionEvent e) {
         try {
-            ImageIO.write(frame.canvas.image, "PNG", new File("test_saves/test.png"));
+            ImageIO.write(frame.canvas.getImage(), "PNG", new File("test_saves/test.png"));
         } catch (IOException ex) {
             System.err.println(ex.toString());
         }

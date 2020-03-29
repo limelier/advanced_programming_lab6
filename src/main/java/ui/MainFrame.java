@@ -1,3 +1,9 @@
+package ui;
+
+import ui.canvas.DrawingPanel;
+import ui.config.ConfigPanel;
+import ui.control.ControlPanel;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -5,9 +11,9 @@ import java.awt.*;
  * The main frame of the application, holds the other ones.
  */
 public class MainFrame extends JFrame {
-    ConfigPanel configPanel;
-    ControlPanel controlPanel;
-    DrawingPanel canvas;
+    public ConfigPanel configPanel;
+    public ControlPanel controlPanel;
+    public DrawingPanel canvas;
 
     public MainFrame() {
         super("My Drawing Application");
@@ -33,7 +39,7 @@ public class MainFrame extends JFrame {
     /**
      * Exit the application.
      */
-    void exit() {
+    public void exit() {
         System.exit(0);
     }
 }

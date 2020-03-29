@@ -1,3 +1,7 @@
+package ui.config;
+
+import ui.MainFrame;
+
 import javax.swing.*;
 
 public class ConfigPanel extends JPanel {
