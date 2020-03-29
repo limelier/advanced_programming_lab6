@@ -64,7 +64,7 @@ public class DrawingPanel extends JPanel {
         if (activeDeque.size() == 50) {
             CanvasShape lastShape = activeDeque.removeLast();
             graphics.setColor(lastShape.color);
-            graphics.fill(shape.shape);
+            graphics.fill(lastShape.shape);
         }
         activeDeque.addFirst(shape);
     }
