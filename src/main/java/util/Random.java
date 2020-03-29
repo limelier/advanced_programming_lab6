@@ -16,4 +16,8 @@ public class Random {
         float a = random.nextFloat();
         return new Color(r, g, b, a);
     }
+
+    public static double randomAngle() {
+        return random.nextFloat() * 2 * Math.PI;
+    }
 }

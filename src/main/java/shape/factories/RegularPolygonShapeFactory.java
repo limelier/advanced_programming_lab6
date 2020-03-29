@@ -7,6 +7,8 @@ import javax.swing.event.ChangeEvent;
 import java.awt.*;
 import java.beans.PropertyChangeEvent;
 
+import static util.Random.randomAngle;
+
 /**
  * Allows the creation of regular polygons of a given radius and number of sides at some coordinates.
  */
@@ -21,7 +23,7 @@ public class RegularPolygonShapeFactory implements ShapeFactory {
 
     @Override
     public Shape getShape(int x, int y) {
-        return new RegularPolygon(x, y, radius, sides);
+        return new RegularPolygon(x, y, radius, sides, randomAngle());
     }
 
     @Override
