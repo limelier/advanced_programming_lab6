@@ -4,28 +4,27 @@ import ui.MainFrame;
 
 import javax.swing.*;
 
-public class RegularPolygonOptionsPanel extends JPanel implements OptionsPanel {
+public class RegularPolygonOptionsPanel extends OptionsPanel {
     final MainFrame frame;
-    JLabel sidesLabel; // we're drawing regular polygons
-    JSpinner sidesField; // number of sides
+    JLabel sidesLabel;
+    JSpinner sidesField;
 
     JLabel sizeLabel;
     JSpinner sizeField;
 
-    JLabel colorLabel;
-    JComboBox<String> colorCombo; // the color of the shape
-
-    public RegularPolygonOptionsPanel(MainFrame frame) {
+    public RegularPolygonOptionsPanel(MainFrame frame, int sides, int size) {
         this.frame = frame;
-        init();
+        init(sides, size);
     }
 
-    private void init() {
+    private void init(int sides, int size) {
         sidesLabel = new JLabel("Number of sides:");
-        sidesField = new JSpinner(new SpinnerNumberModel(6, 3, 100, 1));
+        sidesField = new JSpinner(new SpinnerNumberModel(sides, 3, 100, 1));
+        sidesField.setName("sides");
 
         sizeLabel = new JLabel("Size of the shape:");
-        sizeField = new JSpinner(new SpinnerNumberModel(50, 1, 100, 1));
+        sizeField = new JSpinner(new SpinnerNumberModel(size, 1, 100, 1));
+        sizeField.setName("size");
 
         colorLabel = new JLabel("Color:");
         colorCombo = new JComboBox<>();
@@ -38,17 +37,8 @@ public class RegularPolygonOptionsPanel extends JPanel implements OptionsPanel {
         add(sizeField);
         add(colorLabel);
         add(colorCombo);
-    }
 
-    public int getShapeSides() {
-        return (int) sidesField.getValue();
-    }
-
-    public int getShapeSize() {
-        return (int) sizeField.getValue();
-    }
-
-    public boolean getColorIsRandom() {
-        return (colorCombo.getSelectedItem() == "Random");
+        sidesField.addChangeListener(frame.shapeController.getFactory());
+        sizeField.addChangeListener(frame.shapeController.getFactory());
     }
 }

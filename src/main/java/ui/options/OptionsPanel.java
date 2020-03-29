@@ -1,4 +1,14 @@
 package ui.options;
 
-public interface OptionsPanel {
+import javax.swing.*;
+
+public abstract class OptionsPanel extends JPanel {
+    JLabel colorLabel;
+    JComboBox<String> colorCombo; // the color of the shape
+
+
+    public boolean getColorIsRandom() {
+        return (colorCombo.getSelectedItem() == "Random");
+    }
+
 }

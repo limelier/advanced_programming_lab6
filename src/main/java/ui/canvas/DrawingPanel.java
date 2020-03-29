@@ -1,6 +1,5 @@
 package ui.canvas;
 
-import shapes.RegularPolygon;
 import ui.MainFrame;
 import util.Random;
 
@@ -43,11 +42,10 @@ public class DrawingPanel extends JPanel {
     }
 
     private void drawShape(int x, int y) {
-        int radius = frame.optionsPanel.getShapeSize();
-        int sides = frame.optionsPanel.getShapeSides();
+        Shape shape = frame.shapeController.getShape(x, y);
         Color color = frame.optionsPanel.getColorIsRandom() ? Random.randomColor() : Color.BLACK;
         graphics.setColor(color);
-        graphics.fill(new RegularPolygon(x, y, radius, sides));
+        graphics.fill(shape);
     }
 
     @Override
