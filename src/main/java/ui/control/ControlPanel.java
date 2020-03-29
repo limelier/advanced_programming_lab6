@@ -16,6 +16,8 @@ public class ControlPanel extends JPanel {
     JButton loadBtn = new JButton("Load");
     JButton resetBtn = new JButton("Reset");
     JButton exitBtn = new JButton("Exit");
+    JButton undoBtn = new JButton("Undo");
+    JButton redoBtn = new JButton("Redo");
     JFileChooser jfc = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 
 
@@ -31,11 +33,15 @@ public class ControlPanel extends JPanel {
         add(loadBtn);
         add(resetBtn);
         add(exitBtn);
+        add(undoBtn);
+        add(redoBtn);
 
         saveBtn.addActionListener(this::save);
         loadBtn.addActionListener(this::load);
         resetBtn.addActionListener(this::reset);
         exitBtn.addActionListener(this::exit);
+        undoBtn.addActionListener(this::undo);
+        redoBtn.addActionListener(this::redo);
     }
 
     private void save(ActionEvent e) {
@@ -69,5 +75,16 @@ public class ControlPanel extends JPanel {
 
     private void exit(ActionEvent e) {
         frame.exit();
+        frame.repaint();
+    }
+
+    private void undo(ActionEvent e) {
+        frame.canvas.undo();
+        frame.repaint();
+    }
+
+    private void redo(ActionEvent e) {
+        frame.canvas.redo();
+        frame.repaint();
     }
 }
